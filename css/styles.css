@@ -1,11 +1,3 @@
-/* ==========================================
-   PROJECT 2: LOCAL FAVORITES TRACKER
-   CSS organized by sections for maintainability
-
-   Instructions: Add your styles in the marked sections below.
-   Each section shows which lab adds what code.
-   ========================================== */
-
 /* CSS Reset */
 * {
     margin: 0;
@@ -45,73 +37,231 @@ header h1 {
     opacity: 0.9;
 }
 
+/* MAIN CONTENT & SECTIONS */
 
-/* ==========================================
-   MAIN CONTENT & SECTIONS
-   LAB11: Add section containers and spacing
-   ========================================== */
+main {
+    padding: 2rem 0;
+}
 
-/* TODO LAB11: Add main and section styles */
+section {
+    background: white;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
 
+h2 {
+    color: #667eea;
+    margin-bottom: 1.5rem;
+    font-size: 1.8rem;
+}
 
-/* ==========================================
-   FORM STYLES
-   LAB11: Add form layout and input styling
-   TODO LAB13: May add form validation styles
-   ========================================== */
+/* FORM STYLES*/
 
-/* TODO LAB11: Add .form-group, label, input, select, textarea styles */
+.form-group {
+    margin-bottom: 1.5rem;
+}
 
+label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: #555;
+}
 
-/* ==========================================
-   BUTTONS
-   LAB11: Add primary button styling
-   TODO LAB14: Will add .btn-danger and .btn-secondary here
-   ========================================== */
+input[type="text"],
+select,
+textarea {
+    width: 100%;
+    padding: 0.75rem;
+    border: 2px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-family: inherit;
+    transition: border-color 0.3s ease;
+}
 
-/* TODO LAB11: Add .btn and .btn-primary styles */
+input[type="text"]:focus,
+select:focus,
+textarea:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
 
+textarea {
+    resize: vertical;
+    min-height: 80px;
+}
 
-/* ==========================================
-   SEARCH CONTROLS
-   LAB11: Add search input and filter layout
-   TODO LAB14: Will connect to JavaScript search functionality
-   ========================================== */
+/* BUTTONS */
 
-/* TODO LAB11: Add .search-controls styles */
+.btn {
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-block;
+}
 
+.btn-primary {
+    background-color: #667eea;
+    color: white;
+}
 
-/* ==========================================
-   FAVORITES GRID & CARDS
-   LAB11: Add grid layout structure
-   TODO LAB13: Cards will be populated by JavaScript
-   ========================================== */
+.btn-primary:hover {
+    background-color: #5568d3;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+}
 
-/* TODO LAB11: Add .favorites-grid and .empty-message styles */
+.btn-primary:active {
+    transform: translateY(0);
+}
 
+/* SEARCH CONTROLS */
 
-/* ==========================================
-   FAVORITE CARD STYLES
-   LAB11: Prepare card design for JavaScript
-   LAB13: JavaScript will create cards using these styles
-   ========================================== */
+.search-controls {
+    display: flex;
+    gap: 1rem;
+}
 
-/* TODO LAB11: Add .favorite-card and related styles */
+.search-controls input {
+    flex: 2;
+}
 
+.search-controls select {
+    flex: 1;
+}
 
-/* ==========================================
-   FOOTER
-   LAB11: Add simple centered footer
-   ========================================== */
+/* FAVORTIES GRID & CARDS */
 
-/* TODO LAB11: Add footer styles */
+.favorites-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+}
 
+.empty-message {
+    grid-column: 1 / -1;
+    text-align: center;
+    color: #999;
+    font-style: italic;
+    padding: 2rem;
+}
 
-/* ==========================================
-   RESPONSIVE DESIGN
-   LAB11: Add mobile-first responsive breakpoints
-   IMPORTANT: Keep ALL media queries in this section!
-   TODO LAB13-15: May add responsive adjustments for new features
-   ========================================== */
+/* FAVORITE CARD STYLES */
 
-/* TODO LAB11: Add @media queries for tablet and mobile */
+.favorite-card {
+    background: white;
+    border: 2px solid #e0e0e0;
+    border-radius: 10px;
+    padding: 1.5rem;
+    transition: all 0.3s ease;
+}
+
+.favorite-card:hover {
+    border-color: #667eea;
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.2);
+    transform: translateY(-5px);
+}
+
+.favorite-card h3 {
+    color: #333;
+    margin-bottom: 0.5rem;
+    font-size: 1.3rem;
+}
+
+.favorite-category {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    background-color: #667eea;
+    color: white;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    margin-bottom: 0.5rem;
+}
+
+.favorite-rating {
+    color: #f39c12;
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+}
+
+.favorite-notes {
+    color: #666;
+    margin-bottom: 1rem;
+    line-height: 1.5;
+}
+
+.favorite-date {
+    font-size: 0.85rem;
+    color: #999;
+    margin-bottom: 1rem;
+}
+
+.favorite-actions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+/* FOOTER*/
+
+footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 1.5rem 0;
+    margin-top: 3rem;
+}
+
+footer p {
+    margin: 0;
+}
+
+/* RESPONSIVE DESIGN*/
+
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 2rem;
+    }
+
+    .subtitle {
+        font-size: 1rem;
+    }
+
+    .search-controls {
+        flex-direction: column;
+    }
+
+    .search-controls input,
+    .search-controls select {
+        flex: 1;
+    }
+
+    .favorites-grid {
+        grid-template-columns: 1fr;
+    }
+
+    section {
+        padding: 1.5rem;
+    }
+
+    .btn {
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    header h1 {
+        font-size: 1.5rem;
+    }
+
+    section {
+        padding: 1rem;
+    }
+}
