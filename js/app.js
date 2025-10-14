@@ -1,5 +1,7 @@
+// ==========================================
 // PROJECT 2: LOCAL FAVORITES TRACKER
 // LAB12: JavaScript Fundamentals
+// ==========================================
 
 console.log('JavaScript loaded successfully!');
 console.log('LAB12: Applying Variables and Objects');
