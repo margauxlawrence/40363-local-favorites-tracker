@@ -28,28 +28,13 @@ function displayFavorites() {
         return;
     }
 
-    // Loop through each favorite and create HTML
-favorites.forEach(function(favorite, index) {
-    // Create the star rating display
-    let starsDisplay = '⭐'.repeat(favorite.rating);
+    // Reset search and filter, then search (which displays)
+    document.getElementById('search-input').value = '';
+    document.getElementById('category-filter').value = 'all';
+    searchFavorites();
 
-    // Build the HTML for this favorite card
-    const cardHTML = `
-        <div class="favorite-card">
-            <h3>${favorite.name}</h3>
-            <span class="favorite-category">${favorite.category}</span>
-            <div class="favorite-rating">${starsDisplay} (${favorite.rating}/5)</div>
-            <p class="favorite-notes">${favorite.notes}</p>
-            <p class="favorite-date">Added: ${favorite.dateAdded}</p>
-            <div class="favorite-actions">
-                <button class="btn btn-danger" onclick="deleteFavorite(${index})">Delete</button>
-            </div>
-        </div>
-    `;
-
-    // Add this card to the favorites list
-    favoritesList.innerHTML += cardHTML;
-});
+    console.log('Displayed', favorites.length, 'favorite(s)');
+}
 
 // Function to delete a favorite by index
 window.deleteFavorite = function(index) {  // ✅ made global
@@ -72,8 +57,6 @@ window.deleteFavorite = function(index) {  // ✅ made global
     }
 }
 
-    console.log('Displayed', favorites.length, 'favorite(s)');
-}
 
 // Function to search favorites by name or notes
 function searchFavorites() {
@@ -191,5 +174,16 @@ form.addEventListener('submit', addFavorite);
 
 console.log('Event listener attached - form is ready!');
 
+// Connect search input to searchFavorites function
+const searchInput = document.getElementById('search-input');
+searchInput.addEventListener('input', searchFavorites);
+
+// Connect category filter to searchFavorites function
+const categoryFilter = document.getElementById('category-filter');
+categoryFilter.addEventListener('change', searchFavorites);
+
+console.log('Search and filter event listeners attached!');
+
 // Display empty message when page first loads
 displayFavorites();
+
