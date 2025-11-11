@@ -256,15 +256,3 @@ loadFavorites();
 // Display the loaded favorites (or empty message)
 displayFavorites();
 
-if (confirmDelete) {
-    // Remove from array
-    favorites.splice(index, 1);
-    console.log('Favorite deleted. Total remaining:', favorites.length);
-
-    // Save to localStorage
-    saveFavorites();
-
-    // Re-apply current search/filter
-    searchFavorites();
-}
-
