@@ -20,11 +20,10 @@ body {
 }
 
 header {
-    background: linear-gradient(135deg, #a4b3f7 0%, #be87f5 100%);
+    background: linear-gradient(135deg, #bbc7fc 0%, #c591f8 100%);
     color: white;
     padding: 2rem 0;
     text-align: center;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
 }
 
 header h1 {
