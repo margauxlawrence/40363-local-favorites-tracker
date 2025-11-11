@@ -256,17 +256,15 @@ loadFavorites();
 // Display the loaded favorites (or empty message)
 displayFavorites();
 
-if (!nameInput.value.trim()) {
-    alert('Please enter a place name');
-    return;
-}
+if (confirmDelete) {
+    // Remove from array
+    favorites.splice(index, 1);
+    console.log('Favorite deleted. Total remaining:', favorites.length);
 
-if (confirm(`Are you sure you want to delete "${favorite.name}"?`)) {
-    // Delete the favorite
-}
+    // Save to localStorage
+    saveFavorites();
 
-if (favorites.length === 0) {
-    favoritesContainer.innerHTML = '<p class="empty-state">No favorites yet! Add your first favorite place above.</p>';
-    return;
+    // Re-apply current search/filter
+    searchFavorites();
 }
 
