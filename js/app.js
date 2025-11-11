@@ -65,10 +65,24 @@ function displayFavorites() {
         return;
     }
 
-    // Reset search and filter, then search (which displays)
-    searchInput.value = '';
-    categoryFilter.value = 'all';
-    searchFavorites();
+    // ✅ FIX: do NOT call searchFavorites() here (that variable wasn’t ready yet)
+    // Instead, just render all favorites directly
+    favorites.forEach(function (favorite, index) {
+        let starsDisplay = '⭐'.repeat(favorite.rating);
+        const cardHTML = `
+            <div class="favorite-card">
+                <h3>${favorite.name}</h3>
+                <span class="favorite-category">${favorite.category}</span>
+                <div class="favorite-rating">${starsDisplay} (${favorite.rating}/5)</div>
+                <p class="favorite-notes">${favorite.notes}</p>
+                <p class="favorite-date">Added: ${favorite.dateAdded}</p>
+                <div class="favorite-actions">
+                    <button class="btn btn-danger" onclick="deleteFavorite(${index})">Delete</button>
+                </div>
+            </div>
+        `;
+        favoritesList.innerHTML += cardHTML;
+    });
 }
 
 // Function to search and filter favorites
@@ -97,7 +111,7 @@ function searchFavorites() {
 
     console.log('Found', filteredFavorites.length, 'matching favorites');
 
-    // ✅ Moved this here — AFTER filteredFavorites is defined
+    // ✅ FIX: move count message *after* filteredFavorites is defined
     const countMessage = document.createElement('p');
     countMessage.className = 'favorites-count';
     countMessage.textContent = `Showing ${filteredFavorites.length} of ${favorites.length} favorites`;
@@ -114,9 +128,9 @@ function searchFavorites() {
     }
 
     // Display filtered favorites
-    filteredFavorites.forEach(function (favorite) {
+    filteredFavorites.forEach(function(favorite) {
         const originalIndex = favorites.indexOf(favorite);
-        const starsDisplay = '⭐'.repeat(favorite.rating);
+        let starsDisplay = '⭐'.repeat(favorite.rating);
 
         const cardHTML = `
             <div class="favorite-card">
@@ -192,35 +206,26 @@ function deleteFavorite(index) {
     const favorite = favorites[index];
     const confirmDelete = confirm(`Are you sure you want to delete "${favorite.name}"?`);
 
+    // ✅ FIX: wrap in braces so all three actions are part of the if block
     if (confirmDelete) {
-        // Remove from array
         favorites.splice(index, 1);
         console.log('Favorite deleted. Total remaining:', favorites.length);
 
-        // Save to localStorage
         saveFavorites();
-
-        // Re-apply current search/filter
         searchFavorites();
     }
 }
-    // Function to clear all favorites
+
+// Function to clear all favorites
 function clearAllFavorites() {
-    // Confirm with user
     const confirmClear = confirm('Are you sure you want to delete ALL favorites? This cannot be undone!');
 
     if (confirmClear) {
-        // Clear the array
         favorites = [];
         console.log('All favorites cleared');
-
-        // Clear from localStorage
         localStorage.removeItem('localFavorites');
         console.log('localStorage cleared');
-
-        // Display empty state
         displayFavorites();
-
         alert('All favorites have been deleted.');
     } else {
         console.log('Clear all cancelled by user');
@@ -246,4 +251,3 @@ loadFavorites();
 
 // Display the loaded favorites (or empty message)
 displayFavorites();
-
