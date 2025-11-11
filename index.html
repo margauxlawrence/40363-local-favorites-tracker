@@ -9,20 +9,24 @@
     </head>
     <body>
 <!-- Header Section -->
-        <header>
-            <div class="container">
-                <h1>📍 My Local Favorites</h1>
-                <p class="subtitle">Track your favorite places around town</p>
-            </div>
-        </header>
+    <header>
+        <div class="container">
+            <h1>📍 My Local Favorites</h1>
+            <p class="subtitle">Track your favorite places around town</p>
+        </div>
+    </header>
 
-    <!-- Main Content -->
-        <main class="container">
-    <!-- Add Favorite Form Section -->
-            <section class="add-section">
-                <h2>Add New Favorite</h2>
-                <form id="add-favorite-form">
-        <!-- Name Input -->
+  <!-- Main Content -->
+    <main class="container">
+        <!-- Add Favorite Form Section -->
+        <section class="add-section">
+            <h2>Add New Favorite</h2>
+
+            <!-- Live count of total favorites -->
+            <p id="favorites-count" aria-live="polite">You have 0 favorites</p>
+
+            <form id="add-favorite-form">
+                <!-- Name Input -->
                 <div class="form-group">
                     <label for="name">Place Name *</label>
                     <input
@@ -31,9 +35,11 @@
                         name="name"
                         required
                         placeholder="Enter place name"
-                        aria-required="true">
+                        aria-required="true"
+                    />
                 </div>
-        <!-- Category Dropdown -->
+
+                <!-- Category Dropdown -->
                 <div class="form-group">
                     <label for="category">Category *</label>
                     <select id="category" name="category" required aria-required="true">
@@ -47,7 +53,8 @@
                         <option value="other">Other</option>
                     </select>
                 </div>
-        <!-- Rating Dropdown -->
+
+                <!-- Rating Dropdown -->
                 <div class="form-group">
                     <label for="rating">Rating</label>
                     <select id="rating" name="rating">
@@ -59,59 +66,88 @@
                     </select>
                 </div>
 
-        <!-- Notes Textarea -->
+                <!-- Notes Textarea -->
                 <div class="form-group">
                     <label for="notes">Notes</label>
                     <textarea
                         id="notes"
                         name="notes"
                         rows="3"
-                        placeholder="Add any notes or details..."></textarea>
+                        placeholder="Add any notes or details..."
+                    ></textarea>
                 </div>
-        <!-- Submit Button -->
-                <button type="submit" class="btn btn-primary">Add Favorite</button>
-                </form>
-            </section>  
+
+                <!-- Submit Button -->
+                <button type="submit" class="btn btn-primary" id="submit-btn">
+                    Add Favorite
+                </button>
+            </form>
+
+            <!-- Sorting Controls -->
+            <div id="sort-controls" class="sort-controls">
+                <h3>Sort Favorites</h3>
+                <button type="button" onclick="sortByName()">Sort A–Z</button>
+                <button type="button" onclick="sortByRating()">Sort by Rating</button>
+                <button type="button" onclick="sortByDate()">Newest First</button>
+            </div>
+
+            <!-- Clear All Button -->
+            <div class="clear-controls">
+                <button id="clear-all-btn" class="btn btn-danger">
+                    Clear All Favorites
+                </button>
+            </div>
+        </section>
 
         <!-- Search/Filter Section -->
-            <section class="search-section">
-                <h2>My Favorites</h2>
-                <div class="search-controls">
-                    <input
-                        type="text"
-                        id="search-input"
-                        placeholder="Search favorites..."
-                        aria-label="Search favorites">
-                    <select id="category-filter" aria-label="Filter by category">
-                        <option value="all">All Categories</option>
-                        <option value="coffee">Coffee Shop</option>
-                        <option value="restaurants">Restaurant</option>
-                        <option value="parks">Park</option>
-                        <option value="entertainment">Entertainment</option>
-                        <option value="study-spots">Study Spot</option>
-                        <option value="fitness">Fitness</option>
-                        <option value="other">Other</option>
-                    </select>
-                </div>
-            </section>
+        <section class="search-section">
+            <h2>My Favorites</h>
+            <div class="search-controls">
+                <input
+                type="text"
+                id="search-input"
+                placeholder="Search favorites..."
+                aria-label="Search favorites"
+                />
+                <select id="category-filter" aria-label="Filter by category">
+                    <option value="all">All Categories</option>
+                    <option value="coffee">Coffee Shop</option>
+                    <option value="restaurants">Restaurant</option>
+                    <option value="parks">Park</option>
+                    <option value="entertainment">Entertainment</option>
+                    <option value="study-spots">Study Spot</option>
+                    <option value="fitness">Fitness</option>
+                    <option value="other">Other</option>
+                </select>
+            </div>
+        </section>
 
         <!-- Favorites Display Section -->
-            <section class="favorites-section">
-                <div id="favorites-list" class="favorites-grid">
-        <!-- JavaScript will add favorite cards here -->
-        <!-- For now, add placeholder message -->
-                    <p class="empty-message">No favorites yet. Add your first favorite place above!</p>
-                </div>
-            </section>
-        </main>
-
-    <!-- JavaScript at end of body -->
-        <script src="js/app.js"></script>
-    <!-- Footer -->
-        <footer>
-            <div class="container">
-                <p>&copy; 2025 My Local Favorites | Built with HTML, CSS, and JavaScript</p>
+        <section class="favorites-section">
+            <div
+                id="favorites-list"
+                class="favorites-grid"
+                role="region"
+                aria-label="Favorites list"
+            >
+            <!-- JavaScript will inject cards here -->
+            <p class="empty-message">
+                No favorites yet. Add your first favorite place above!
+            </p>
             </div>
-        </footer>
-    </body>
+        </section>
+    </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <p>
+        &copy; 2025 My Local Favorites | Built with HTML, CSS, and JavaScript
+      </p>
+    </div>
+  </footer>
+
+  <!-- JavaScript at end of body -->
+  <script src="js/app.js"></script>
+</body>
 </html>

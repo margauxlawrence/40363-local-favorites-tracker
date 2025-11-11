@@ -65,7 +65,6 @@ function displayFavorites() {
         return;
     }
 
-    // ✅ FIX: do NOT call searchFavorites() here (that variable wasn’t ready yet)
     // Instead, just render all favorites directly
     favorites.forEach(function (favorite, index) {
         let starsDisplay = '⭐'.repeat(favorite.rating);
@@ -195,6 +194,23 @@ function addFavorite(event) {
     // Display updated list (resets filters)
     displayFavorites();
 
+    // Inside addFavorite()
+    if (!nameValue.trim()) {
+        alert('⚠️ Please enter a place name before saving!');
+        nameInput.style.borderColor = 'red';
+        return;
+    } else {
+    nameInput.style.borderColor = '';
+    }
+
+    if (!categoryValue) {
+        alert('⚠️ Please select a category!');
+        categoryInput.style.borderColor = 'red';
+        return;
+    } else {
+    categoryInput.style.borderColor = '';
+    }
+
     console.log('Favorite added successfully!');
 }
 
@@ -213,6 +229,24 @@ function deleteFavorite(index) {
 
         saveFavorites();
         searchFavorites();
+        function sortByName() {
+            favorites.sort((a, b) => a.name.localeCompare(b.name));
+            saveFavorites();
+            displayFavorites();
+        }
+
+        function sortByRating() {
+            favorites.sort((a, b) => b.rating - a.rating);
+            saveFavorites();
+            displayFavorites();
+        }
+
+        function sortByDate() {
+            favorites.sort((a, b) => new Date(b.dateAdded) - new Date(a.dateAdded));
+            saveFavorites();
+            displayFavorites();
+        }
+
     }
 }
 
