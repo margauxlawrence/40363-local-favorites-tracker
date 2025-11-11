@@ -84,27 +84,24 @@ function searchFavorites() {
 
     // Filter favorites based on search text and category
     const filteredFavorites = favorites.filter(function(favorite) {
-        // Check if name or notes match search text
-        const matchesSearch = searchText === '' ||
-                             favorite.name.toLowerCase().includes(searchText) ||
-                             favorite.notes.toLowerCase().includes(searchText);
+        const matchesSearch =
+            searchText === '' ||
+            favorite.name.toLowerCase().includes(searchText) ||
+            favorite.notes.toLowerCase().includes(searchText);
 
-        // Check if category matches filter
-        const matchesCategory = selectedCategory === 'all' ||
-                               favorite.category === selectedCategory;
+        const matchesCategory =
+            selectedCategory === 'all' || favorite.category === selectedCategory;
 
-        // Return true only if both conditions match
         return matchesSearch && matchesCategory;
     });
 
     console.log('Found', filteredFavorites.length, 'matching favorites');
 
-    // Display count of visible favorites
-        const countMessage = document.createElement('p');
-        countMessage.className = 'favorites-count';
-        countMessage.textContent = `Showing ${filteredFavorites.length} of ${favorites.length} favorites`;
-        favoritesList.prepend(countMessage);
-
+    // ✅ Moved this here — AFTER filteredFavorites is defined
+    const countMessage = document.createElement('p');
+    countMessage.className = 'favorites-count';
+    countMessage.textContent = `Showing ${filteredFavorites.length} of ${favorites.length} favorites`;
+    favoritesList.prepend(countMessage);
 
     // Check if any favorites match
     if (filteredFavorites.length === 0) {
@@ -117,14 +114,10 @@ function searchFavorites() {
     }
 
     // Display filtered favorites
-    filteredFavorites.forEach(function(favorite) {
-        // Find the original index for delete button
+    filteredFavorites.forEach(function (favorite) {
         const originalIndex = favorites.indexOf(favorite);
+        const starsDisplay = '⭐'.repeat(favorite.rating);
 
-        // Create the star rating display
-        let starsDisplay = '⭐'.repeat(favorite.rating);
-
-        // Build the HTML for this favorite card
         const cardHTML = `
             <div class="favorite-card">
                 <h3>${favorite.name}</h3>
@@ -137,8 +130,6 @@ function searchFavorites() {
                 </div>
             </div>
         `;
-
-        // Add this card to the favorites list
         favoritesList.innerHTML += cardHTML;
     });
 }
