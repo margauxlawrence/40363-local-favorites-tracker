@@ -99,6 +99,13 @@ function searchFavorites() {
 
     console.log('Found', filteredFavorites.length, 'matching favorites');
 
+    // Display count of visible favorites
+        const countMessage = document.createElement('p');
+        countMessage.className = 'favorites-count';
+        countMessage.textContent = `Showing ${filteredFavorites.length} of ${favorites.length} favorites`;
+        favoritesList.prepend(countMessage);
+
+
     // Check if any favorites match
     if (filteredFavorites.length === 0) {
         if (searchText !== '' || selectedCategory !== 'all') {
