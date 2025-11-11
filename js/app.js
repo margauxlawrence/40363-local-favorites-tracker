@@ -255,3 +255,55 @@ loadFavorites();
 
 // Display the loaded favorites (or empty message)
 displayFavorites();
+
+if (!nameInput.value.trim()) {
+    alert('Please enter a place name');
+    return;
+}
+
+if (confirm(`Are you sure you want to delete "${favorite.name}"?`)) {
+    // Delete the favorite
+}
+
+if (favorites.length === 0) {
+    favoritesContainer.innerHTML = '<p class="empty-state">No favorites yet! Add your first favorite place above.</p>';
+    return;
+}
+
+submitBtn.textContent = 'Saving...';
+// ... save the favorite ...
+submitBtn.textContent = 'Added!';
+setTimeout(() => {
+    submitBtn.textContent = 'Add Favorite';
+}, 2000);
+
+nameInput.addEventListener('input', function() {
+    if (this.value.trim() === '') {
+        this.style.borderColor = 'red';
+    } else {
+        this.style.borderColor = '';
+    }
+});
+
+function sortByName() {
+    favorites.sort((a, b) => a.name.localeCompare(b.name));
+    displayFavorites();
+}
+
+function sortByRating() {
+    favorites.sort((a, b) => b.rating - a.rating);
+    displayFavorites();
+}
+
+function filterByRating(minRating) {
+    const filtered = favorites.filter(fav => fav.rating >= minRating);
+    displayFilteredFavorites(filtered);
+}
+
+function updateCount() {
+    const countElement = document.getElementById('favorites-count');
+    countElement.textContent = `You have ${favorites.length} favorite${favorites.length === 1 ? '' : 's'}`;
+}
+
+favorite.lastModified = new Date().toLocaleString();
+
