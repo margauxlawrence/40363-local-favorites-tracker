@@ -20,7 +20,7 @@ body {
 }
 
 header {
-    background: linear-gradient(135deg, #bbc7fc 0%, #c591f8 100%);
+    background: linear-gradient(135deg, #c2cefa 0%, #c591f8 100%);
     color: white;
     padding: 2rem 0;
     text-align: center;
@@ -51,7 +51,7 @@ section {
 }
 
 h2 {
-    color: #be87f5;
+    color: #c591f8;
     margin-bottom: 1.5rem;
     font-size: 1.8rem;
 }
@@ -85,7 +85,7 @@ input[type="text"]:focus,
 select:focus,
 textarea:focus {
     outline: none;
-    border-color: #be87f5;
+    border-color: #c591f8;
     box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
 }
 
@@ -108,12 +108,12 @@ textarea {
 }
 
 .btn-primary {
-    background-color: #be87f5;
+    background-color: #c591f8;
     color: white;
 }
 
 .btn-primary:hover {
-    background-color: #be87f5;
+    background-color: #c591f8;
     transform: translateY(-2px);
     box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
 }
@@ -179,7 +179,7 @@ textarea {
 }
 
 .favorite-card:hover {
-    border-color: #be87f5;
+    border-color: #c591f8;
     box-shadow: 0 4px 12px rgba(102, 126, 234, 0.2);
     transform: translateY(-5px);
 }
@@ -193,7 +193,7 @@ textarea {
 .favorite-category {
     display: inline-block;
     padding: 0.25rem 0.75rem;
-    background-color: #be87f5;
+    background-color: #c591f8;
     color: white;
     border-radius: 20px;
     font-size: 0.85rem;
