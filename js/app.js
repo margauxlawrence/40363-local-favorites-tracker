@@ -69,13 +69,6 @@ function displayFavorites() {
     searchInput.value = '';
     categoryFilter.value = 'all';
     searchFavorites();
-
-    // Display count
-    const countMessage = document.createElement('p');
-    countMessage.className = 'favorites-count';
-    countMessage.textContent = `Showing ${filteredFavorites.length} of ${favorites.length} favorites`;
-    favoritesList.prepend(countMessage);
-
 }
 
 // Function to search and filter favorites
@@ -198,11 +191,10 @@ function deleteFavorite(index) {
     console.log('Deleting favorite at index:', index);
     console.log('Favorite to delete:', favorites[index].name);
 
-    // Confirm deletion with user
     const favorite = favorites[index];
     const confirmDelete = confirm(`Are you sure you want to delete "${favorite.name}"?`);
 
-    if (confirmDelete) 
+    if (confirmDelete) {
         // Remove from array
         favorites.splice(index, 1);
         console.log('Favorite deleted. Total remaining:', favorites.length);
@@ -213,6 +205,7 @@ function deleteFavorite(index) {
         // Re-apply current search/filter
         searchFavorites();
     }
+}
     // Function to clear all favorites
 function clearAllFavorites() {
     // Confirm with user
