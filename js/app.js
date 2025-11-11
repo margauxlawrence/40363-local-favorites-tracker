@@ -13,16 +13,18 @@ let favorites = [];
 const form = document.getElementById('add-favorite-form');
 const favoritesList = document.getElementById('favorites-list');
 const searchInput = document.getElementById('search-input');
-const categoryFilter = document.getElementById('category-filter');
+const filterSort = document.getElementById('filter-sort');
 const countElement = document.getElementById('favorites-count');
 const submitBtn = document.getElementById('submit-btn');
 
 console.log('Form:', form);
 console.log('Favorites list:', favoritesList);
 console.log('Search input:', searchInput);
-console.log('Category filter:', categoryFilter);
+console.log('Filter/sort dropdown:', filterSort);
 
-// Function to save favorites to localStorage
+// ================================
+// Save & Load from localStorage
+// ================================
 function saveFavorites() {
   try {
     localStorage.setItem('localFavorites', JSON.stringify(favorites));
@@ -34,7 +36,6 @@ function saveFavorites() {
   }
 }
 
-// Function to load favorites from localStorage
 function loadFavorites() {
   try {
     const savedData = localStorage.getItem('localFavorites');
@@ -53,17 +54,20 @@ function loadFavorites() {
   }
 }
 
-// Function to update favorites count
+// ================================
+// Update Count
+// ================================
 function updateCount() {
   if (countElement) {
     countElement.textContent = `You have ${favorites.length} favorite${favorites.length === 1 ? '' : 's'}`;
   }
 }
 
-// Function to display all favorites on the page
+// ================================
+// Display All Favorites
+// ================================
 function displayFavorites() {
   console.log('Displaying favorites...');
-
   favoritesList.innerHTML = '';
 
   if (favorites.length === 0) {
@@ -93,10 +97,17 @@ function displayFavorites() {
   updateCount();
 }
 
-// Function to search and filter favorites
+// ================================
+// Search & Filter Favorites
+// ================================
 function searchFavorites() {
   const searchText = searchInput.value.toLowerCase().trim();
-  const selectedCategory = categoryFilter.value;
+  const selectedValue = filterSort.value;
+
+  // If dropdown is a sort option, ignore filtering
+  const selectedCategory = selectedValue.startsWith('sort')
+    ? 'all'
+    : selectedValue;
 
   console.log('Searching for:', searchText, 'Category:', selectedCategory);
 
@@ -147,7 +158,9 @@ function searchFavorites() {
   });
 }
 
-// Function to handle adding a new favorite
+// ================================
+// Add New Favorite
+// ================================
 function addFavorite(event) {
   event.preventDefault();
   console.log('Add Favorite button clicked!');
@@ -179,7 +192,7 @@ function addFavorite(event) {
     categoryInput.style.borderColor = '';
   }
 
-  // Temporary button feedback
+  // Button feedback
   submitBtn.textContent = 'Saving...';
 
   const newFavorite = {
@@ -196,7 +209,6 @@ function addFavorite(event) {
   form.reset();
   displayFavorites();
 
-  // Button reset animation
   submitBtn.textContent = 'Added!';
   setTimeout(() => {
     submitBtn.textContent = 'Add Favorite';
@@ -205,7 +217,9 @@ function addFavorite(event) {
   console.log('Favorite added successfully!');
 }
 
-// Sorting functions
+// ================================
+// Sorting Functions
+// ================================
 function sortByName() {
   favorites.sort((a, b) => a.name.localeCompare(b.name));
   saveFavorites();
@@ -224,7 +238,9 @@ function sortByDate() {
   displayFavorites();
 }
 
-// Function to delete a favorite by index
+// ================================
+// Delete Favorite
+// ================================
 function deleteFavorite(index) {
   console.log('Deleting favorite at index:', index);
   console.log('Favorite to delete:', favorites[index].name);
@@ -240,10 +256,11 @@ function deleteFavorite(index) {
   }
 }
 
-// Function to clear all favorites
+// ================================
+// Clear All Favorites
+// ================================
 function clearAllFavorites() {
   const confirmClear = confirm('Are you sure you want to delete ALL favorites? This cannot be undone!');
-
   if (confirmClear) {
     favorites = [];
     console.log('All favorites cleared');
@@ -255,10 +272,26 @@ function clearAllFavorites() {
   }
 }
 
-// Connect event listeners
+// ================================
+// Unified Filter/Sort Dropdown
+// ================================
+filterSort.addEventListener('change', function () {
+  const value = this.value;
+
+  if (value.startsWith('sort')) {
+    if (value === 'sort-name') sortByName();
+    else if (value === 'sort-rating') sortByRating();
+    else if (value === 'sort-date') sortByDate();
+  } else {
+    searchFavorites();
+  }
+});
+
+// ================================
+// Event Listeners
+// ================================
 form.addEventListener('submit', addFavorite);
 searchInput.addEventListener('input', searchFavorites);
-categoryFilter.addEventListener('change', searchFavorites);
 
 const clearAllBtn = document.getElementById('clear-all-btn');
 if (clearAllBtn) {
@@ -266,6 +299,8 @@ if (clearAllBtn) {
   console.log('Clear all button connected');
 }
 
-// Load saved favorites from localStorage on startup
+// ================================
+// Initialize App
+// ================================
 loadFavorites();
 displayFavorites();

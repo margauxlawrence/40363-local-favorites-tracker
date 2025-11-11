@@ -94,31 +94,27 @@
                 placeholder="Search favorites..."
                 aria-label="Search favorites"
                 />
-                <select id="category-filter" aria-label="Filter by category">
-                    <option value="all">All Categories</option>
-                    <option value="coffee">Coffee Shop</option>
-                    <option value="restaurants">Restaurant</option>
-                    <option value="parks">Park</option>
-                    <option value="entertainment">Entertainment</option>
-                    <option value="study-spots">Study Spot</option>
-                    <option value="fitness">Fitness</option>
-                    <option value="other">Other</option>
+                <!-- Combined Filter + Sort Dropdown -->
+                <select id="filter-sort" aria-label="Filter or sort favorites">
+                    <option value="all">Filter/Sort</option>
+                    <option disabled>──────────</option>
+                    <option value="coffee">☕ Coffee Shop</option>
+                    <option value="restaurants">🍽️ Restaurant</option>
+                    <option value="parks">🌳 Park</option>
+                    <option value="entertainment">🎭 Entertainment</option>
+                    <option value="study-spots">📚 Study Spot</option>
+                    <option value="fitness">💪 Fitness</option>
+                    <option value="other">📍 Other</option>
+                    <option disabled>──────────</option>
+                    <option value="sort-name">🔤 Sort A–Z</option>
+                    <option value="sort-rating">⭐ Sort by Rating</option>
+                    <option value="sort-date">🕒 Newest First</option>
                 </select>
 
-                <!-- Sorting Controls -->
-                <div id="sort-controls" class="sort-controls">
-                    <h3>Sort Favorites</h3>
-                        <button type="button" onclick="sortByName()">Sort A–Z</button>
-                        <button type="button" onclick="sortByRating()">Sort by Rating</button>
-                        <button type="button" onclick="sortByDate()">Newest First</button>
-                </div>
-
                 <!-- Clear All Button -->
-                <div class="clear-controls">
-                    <button id="clear-all-btn" class="btn btn-danger">
-                        Clear All Favorites
-                    </button>
-                </div>
+                <button id="clear-all-btn" class="btn btn-danger">
+                    Clear All Favorites
+                </button>
             </div>
         </section>
 
